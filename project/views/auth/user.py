@@ -4,32 +4,19 @@ import jwt
 
 from project.setup.api.models import auth, auth_result
 from project.container import user_service
+from ...utils import auth_required
 
 api = Namespace('user')
 
 
 @api.route('/')
 class UserView(Resource):
-    @api.expect(auth)
-    @api.marshal_with(auth_result, code=200)
+
+    @auth_required
     def get(self):
-        if 'Authorization' not in request.headers:
-            abort(401)
+        pass
 
-        data = request.headers['Authorization']
-        token = data.split('Bearer ')[-1]
-
-        try:
-           user = jwt.decode(token, key=current_app.config['SECRET_KEY'],
-                       algorithm=current_app.config['JWT_ALGORITHM'])
-        except Exception as error:
-            print(error)
-            abort(401)
-
-        return jsonify(user)
-
-    @api.expect(auth)
-    @api.marshal_with(auth_result, code=200)
+    @auth_required
     def patch(self):
         data = request.json
 
@@ -45,8 +32,7 @@ class UserView(Resource):
 @api.route('password')
 class UserPasswordView(Resource):
 
-    @api.expect(auth)
-    @api.marshal_with(auth_result, code=200)
+    @auth_required
     def put(self):
         data = request.json
         email = data.get('email')
