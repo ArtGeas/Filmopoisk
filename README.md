@@ -1,25 +1,31 @@
-# Исходный код для курсовой работы №3
+# Filmopoisk
+On this site you can see information about the films. If you register on the site, the user can add movies to favorites in his personal account
 
-## Описание проекта
-- Установка зависимостей
+## Requirements
+
+* Python 3.10.6
+
+* Node 19.8.1
+  
+* Flask==2.1.3
+
+## Build
+
 ```shell
 pip install -r requirements.txt
 
 pip install -r requirements.dev.txt
 ```
 
-- Создание моделей (очистит БД и создаст все модели, указанные в импорте)
+1. Create models (clean up DB and create models from import)
 ```shell
 python create_tables.py
 ```
 
-- Загрузка данных в базу
+2. Download data to DB
 ```shell
 python load_fixture.py
 ```
-Скрпит читает файл fixtures.json и загружает данные в базу. Если данные уже загружены - выводит соответсвующее сообщение. 
-
-## Запуск проекта
 
 ### Bash (Linux/MACOS)
 ```shell
@@ -42,8 +48,7 @@ $env:FLASK_ENV = "development"
 flask run
 ```
 
-## Запуск тестов
+## Tests
 ```shell
 pytest .
 ```
-
